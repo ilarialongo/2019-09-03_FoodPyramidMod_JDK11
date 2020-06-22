@@ -109,6 +109,32 @@ public class FoodDAO {
 
 	}
 	
+	public List<String> getTipologia(int C) {
+		String sql="SELECT DISTINCT p.portion_display_name " + 
+				"FROM portion as p " + 
+				"WHERE p.calories<?";
+		List<String> risultato= new ArrayList<String>();
+		try {
+			Connection conn = DBConnect.getConnection() ;
+			PreparedStatement st = conn.prepareStatement(sql) ;
+			st.setInt(1, C);
+			ResultSet res = st.executeQuery() ;
+			
+			while(res.next()) {
+				risultato.add(res.getString("portion_display_name"));	
+			}
+			
+			conn.close();
+			return risultato;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null ;
+		}
+				
+		
+	}
+	
 	
 
 }
