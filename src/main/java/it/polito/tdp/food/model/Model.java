@@ -54,4 +54,6 @@ public class Model {
 	public int archi() {
 		return this.grafo.edgeSet().size();
 	}
+	
+	
 }
