@@ -47,6 +47,31 @@ public class FXMLController {
 
     @FXML
     void doCammino(ActionEvent event) {
+    	txtResult.clear();
+    	String porzione= boxPorzioni.getValue();
+    	if (porzione==null) {
+    		txtResult.appendText("ERRORE");
+    		return;
+    	}
+    	int N;
+    	try {
+    		N=Integer.parseInt(txtPassi.getText());
+    	
+    	}catch (NumberFormatException e) {
+    		txtResult.appendText("Inserire numero valido");
+    		return;
+    	}
+    	this.model.cercaCammino(N, porzione);
+    	
+    	if (this.model.getCamminoMax()==null) {
+    		txtResult.appendText("Cammino massimo di lunghezza N non trovato \n");
+    	}
+    	else {
+    		txtResult.appendText(String.format("Trovato cammino di peso %f \n", this.model.getPesoMax()));
+    		for (String s: this.model.getCamminoMax()) {
+    			txtResult.appendText(s+"\n");
+    		}
+    	}
 
     }
 
